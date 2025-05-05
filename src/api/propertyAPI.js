@@ -1,21 +1,50 @@
-const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': 'd0922aa31dmshe81c8fefd12d849p12c1aOjsnf083b257780d',
-      'X-RapidAPI-Host': 'bayut.p.rapidapi.com',
-    },
+// src/api/propertyAPI.js
+
+const headers = {
+    'X-RapidAPI-Key': 'd0922aa31dmshe81c8fefd12d849p12c1a0jsnf083b257780d', // 🔒 Replace with your RapidAPI key
+    'X-RapidAPI-Host': 'bayut.p.rapidapi.com',
   };
   
-  export const fetchProperties = async (locationExternalID, filters) => {
-    let query = `locationExternalIDs=${locationExternalID}&purpose=for-sale&hitsPerPage=10`;
+  export const fetchProperties = async (params = {}) => {
+    const {
+      purpose = 'for-sale',
+      locationExternalIDs = '5002',
+      categoryExternalID = '4',
+      priceMin,
+      priceMax,
+      roomsMin,
+      bathsMin,
+      furnishingStatus,
+      sort = 'price-desc',
+      hitsPerPage = 12,
+      page = 1,
+    } = params;
   
-    if (filters.minPrice) query += `&minPrice=${filters.minPrice}`;
-    if (filters.maxPrice) query += `&maxPrice=${filters.maxPrice}`;
-    if (filters.bedsMin) query += `&roomsMin=${filters.bedsMin}`;
-    if (filters.propertyType) query += `&categoryExternalID=${filters.propertyType}`;
+    const query = new URLSearchParams({
+      purpose,
+      locationExternalIDs,
+      categoryExternalID,
+      sort,
+      hitsPerPage,
+      page,
+    });
   
-    const res = await fetch(`https://bayut.p.rapidapi.com/properties/list?${query}`, options);
-    const data = await res.json();
-    return data?.hits || [];
+    if (priceMin) query.append('priceMin', priceMin);
+    if (priceMax) query.append('priceMax', priceMax);
+    if (roomsMin) query.append('roomsMin', roomsMin);
+    if (bathsMin) query.append('bathsMin', bathsMin);
+    if (furnishingStatus) query.append('furnishingStatus', furnishingStatus);
+  
+    try {
+      const res = await fetch(
+        `https://bayut.p.rapidapi.com/properties/list?${query.toString()}`,
+        { method: 'GET', headers }
+      );
+      const data = await res.json();
+      return data.hits || [];
+    } catch (err) {
+      console.error('Error fetching properties:', err);
+      return [];
+    }
   };
   

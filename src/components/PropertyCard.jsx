@@ -1,20 +1,26 @@
-import React from 'react'
+// src/components/PropertyCard.jsx
 
-const PropertyCard = () => {
+import React from 'react';
+
+const PropertyCard = ({ properties }) => {
   return (
-    <div className='text-black w-[65%]'>
-      <div className='flex gap-[2vw]'>
-        <div className='w-[15vw] h-[19vw] bg-black ' ></div>
-        <div className='w-[15vw] h-[19vw] bg-black ' ></div>
-        <div className='w-[15vw] h-[19vw] bg-black ' ></div>
-      </div>
-      <div className='flex gap-[2vw]'>
-        <div className='w-[15vw] h-[19vw] bg-black ' ></div>
-        <div className='w-[15vw] h-[19vw] bg-black ' ></div>
-        <div className='w-[15vw] h-[19vw] bg-black ' ></div>
-      </div>
+    <div className="text-black w-[65%] grid grid-cols-3 gap-[2vw]">
+      {properties.map((property) => (
+        <div key={property.id} className="bg-white p-4 rounded shadow-md">
+          <img
+            src={property.coverPhoto?.url}
+            alt="property"
+            className="w-full h-[12vw] object-cover rounded"
+          />
+          <h3 className="text-lg mt-2">{property.title?.slice(0, 40)}...</h3>
+          <p className="text-sm text-gray-700">AED {property.price}</p>
+          <p className="text-xs text-gray-500">
+            🛏 {property.rooms} | 🛁 {property.baths} | 📐 {property.area.toFixed(0)} sqft
+          </p>
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default PropertyCard
+export default PropertyCard;

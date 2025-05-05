@@ -1,15 +1,41 @@
-import React from 'react'
-import PropertyCard from './PropertyCard'
-import FilterPanel from './FilterPanel'
-const PropertyPage = ({properties,setFilters,setLocationID}) => {
+// src/pages/PropertyPage.jsx
+
+import React, { useState, useEffect } from 'react';
+import FilterPanel from '../components/FilterPanel';
+import PropertyCard from '../components/PropertyCard';
+import { fetchProperties } from '../api/propertyAPI';
+
+const PropertyPage = () => {
+  const [filters, setFilters] = useState({
+    purpose: 'for-sale',
+    locationExternalIDs: '5002',
+    categoryExternalID: '4',
+    priceMin: '',
+    priceMax: '',
+    roomsMin: '',
+    bathsMin: '',
+    furnishingStatus: '',
+    sort: 'price-desc',
+  });
+
+  const [properties, setProperties] = useState([]);
+
+  useEffect(() => {
+    const loadProperties = async () => {
+      const data = await fetchProperties(filters);
+      setProperties(data);
+    };
+    loadProperties();
+  }, [filters]);
+
   return (
-    <div className='flex justify-center items-center mt-[2vw]'>
-      <div className='w-[90vw] h-[95vh] flex justify-between border-[1px] p-[1vw]'> 
-        <FilterPanel setFilters = {setFilters} setLocationID = {setLocationID} />
-        <PropertyCard properties = {properties}/>
+    <div className="flex justify-center items-start mt-8">
+      <div className="w-[90vw] flex justify-between gap-6">
+        <FilterPanel filters={filters} setFilters={setFilters} />
+        <PropertyCard properties={properties} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PropertyPage
+export default PropertyPage;
