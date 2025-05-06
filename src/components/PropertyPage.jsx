@@ -29,7 +29,7 @@ const PropertyPage = () => {
   }, [filters]);
 
   return (
-    <div className="flex justify-center items-start mt-8">
+    <div className="flex justify-center mt-8">
       <div className="w-[90vw] flex justify-between gap-6">
         <FilterPanel filters={filters} setFilters={setFilters} />
         <PropertyCard properties={properties} />

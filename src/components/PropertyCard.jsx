@@ -4,7 +4,7 @@ import React from 'react';
 
 const PropertyCard = ({ properties }) => {
   return (
-    <div className="text-black w-[65%] grid grid-cols-3 gap-[2vw]">
+    <div className="text-black w-[70%] grid grid-cols-3 gap-[2vw] bg-blue-100 overflow-y-scroll p-[2vw] h-[81vh] rounded-[1vw]">
       {properties.map((property) => (
         <div key={property.id} className="bg-white p-4 rounded shadow-md">
           <img

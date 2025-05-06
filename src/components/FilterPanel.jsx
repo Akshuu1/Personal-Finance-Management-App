@@ -16,16 +16,16 @@ const FilterPanel = ({ filters, setFilters }) => {
   };
 
   return (
-    <div className="bg-blue-100 w-[30%] rounded-lg p-4">
+    <div className="bg-blue-100 w-[30%] h-[fit-content] rounded-[1vw] p-[2vw] ">
       <h2 className="text-xl font-bold mb-4">Filters</h2>
 
-      <label>Purpose</label>
-      <select value={localFilters.purpose} onChange={(e) => updateLocal('purpose', e.target.value)} className="w-full p-2 mb-3">
+      <label className='font-bold'>Purpose</label>
+      <select value={localFilters.purpose} onChange={(e) => updateLocal('purpose', e.target.value)} className="w-full p-2 mb-3 ">
         <option value="for-sale">Buy</option>
         <option value="for-rent">Rent</option>
       </select>
 
-      <label>Type</label>
+      <label className='font-bold'>Type</label>
       <select value={localFilters.categoryExternalID} onChange={(e) => updateLocal('categoryExternalID', e.target.value)} className="w-full p-2 mb-3">
         <option value="4">Apartment</option>
         <option value="16">Villa</option>
@@ -33,29 +33,29 @@ const FilterPanel = ({ filters, setFilters }) => {
         <option value="25">Penthouse</option>
       </select>
 
-      <label>Min Price</label>
-      <input type="number" value={localFilters.priceMin} onChange={(e) => updateLocal('priceMin', e.target.value)} className="w-full p-2 mb-3" />
+      <label className='font-bold'>Min Price</label>
+      <input type="number" value={localFilters.priceMin} onChange={(e) => updateLocal('priceMin', e.target.value)} className="w-full p-2 mb-3 border-b-[1px]" />
 
-      <label>Max Price</label>
-      <input type="number" value={localFilters.priceMax} onChange={(e) => updateLocal('priceMax', e.target.value)} className="w-full p-2 mb-3" />
+      <label className='font-bold'>Max Price</label>
+      <input type="number" value={localFilters.priceMax} onChange={(e) => updateLocal('priceMax', e.target.value)} className="w-full p-2 mb-3 border-b-[1px]" />
 
-      <label>Bedrooms</label>
+      <label className='font-bold'>Bedrooms</label>
       <select value={localFilters.roomsMin} onChange={(e) => updateLocal('roomsMin', e.target.value)} className="w-full p-2 mb-3">
         <option value="">Any</option>
-        <option value="1">1+</option>
-        <option value="2">2+</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
         <option value="3">3+</option>
       </select>
 
-      <label>Bathrooms</label>
+      <label className='font-bold'>Bathrooms</label>
       <select value={localFilters.bathsMin} onChange={(e) => updateLocal('bathsMin', e.target.value)} className="w-full p-2 mb-3">
         <option value="">Any</option>
-        <option value="1">1+</option>
-        <option value="2">2+</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
         <option value="3">3+</option>
       </select>
 
-      <label>Furnishing</label>
+      <label className='font-bold'>Furnishing</label>
       <select value={localFilters.furnishingStatus} onChange={(e) => updateLocal('furnishingStatus', e.target.value)} className="w-full p-2 mb-4">
         <option value="">All</option>
         <option value="furnished">Furnished</option>

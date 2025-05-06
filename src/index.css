@@ -1,0 +1,7 @@
+@font-face {
+    font-family: Gilroy-Regular;
+    src: url('/Users/akki/Downloads/gilroy-bold-webfont/Gilroy-Regular.woff');
+}
+body{
+    font-family: Gilroy-Light;
+}
